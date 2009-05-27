@@ -241,9 +241,9 @@ VALUE rb_rrd_update(VALUE self, VALUE args)
     return rrd_call(rrd_update, args);
 }
 
-void Init_RRD() 
+void Init_RRDtool() 
 {
-    mRRD = rb_define_module("RRD");
+    mRRD = rb_define_module("RRDtool");
     rb_eRRDError = rb_define_class("RRDError", rb_eStandardError);
 
     rb_define_module_function(mRRD, "create", rb_rrd_create, -2);

@@ -7,7 +7,7 @@ require 'mkmf'
 # ruby ./extconf.rb --with-rrd-dir=/usr/local/rrdtool-1.2.12
 
 libpaths=%w(/lib /usr/lib /usr/local/lib /sw/lib /opt/local/lib)
-%w(art_lgpl_2 freetype png z).sort.reverse.each do |lib|
+%w(art_lgpl_2 freetype png rrd z).sort.reverse.each do |lib|
 	find_library(lib, nil, *libpaths)
 end
 

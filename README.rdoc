@@ -1,6 +1,6 @@
 = activerrd
 
-* http://github.com/#{github_username}/#{project_name}
+* http://github.com/adrianpike/activerrd
 
 Based upon hard and most appreciated work by:
  			David Bacher <drbacher at alum.mit.edu>
@@ -9,15 +9,40 @@ Based upon hard and most appreciated work by:
 
 == DESCRIPTION:
 
-FIX (describe your package)
+ActiveRRD is a tool for having an AR-ish wrapper around Round Robin Databases. Someday I might make this shinier, but for now I'm just going to get basic functionality so i can use it.
 
 == FEATURES/PROBLEMS:
 
-* FIX (list of features or problems)
+* Uh, it's incomplete.
 
 == SYNOPSIS:
 
-  FIX (code sample of usage)
+class FooRrd < Activerrd::Base
+	rrd_step 30
+
+	rrd_data_source 'load', :gauge, :heartbeat=>60, :min=>0, :max=>255
+	rrd_data_source 'hits', :absolute, :heartbeat=>300, :min=>0, :max=>20000 # hits since the last load, since it's absolute
+	
+	rrd_archive :average, :steps=>100
+	rrd_archive :max, :steps=>5, :rows=>36, :xff=>0.5
+	rrd_archive :max, :steps=>50, :rows=>24
+end
+
+s = FooRrd.new
+s.load = 300
+s.hits = 20
+s.save
+
+s = FooRrd.new
+s.load=12
+s.hits=50200
+s.created_at=Time.new-2.minutes
+s.save
+
+FooRrd.find(:average,:start=>Time.new-1.week,:end=>Time.new,:resolution=>5)
+FooRrd.find(:max,:start=>Time.new-5.minutes)
+
+FooRrd.graph(:start=>Time.new-1.day,:end=>Time.new,:step=>2,:title=>'Foos',:vertical_label=>'Bars') # this will spit back a File.
 
 == REQUIREMENTS:
 
@@ -37,7 +62,7 @@ make install
 
 (The MIT License)
 
-Copyright (c) 2009 FIXME full name
+Copyright (c) 2009 Adrian Pike
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the

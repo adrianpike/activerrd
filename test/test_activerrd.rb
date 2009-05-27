@@ -2,8 +2,11 @@ require File.dirname(__FILE__) + '/test_helper.rb'
 
 class TestActiverrd < Test::Unit::TestCase
 
+  class FooRrd< Activerrd::Base
+  end
+
   def setup
-    @a = Activerrd::Base.new
+    @a = FooRrd.new('test')
   end
   
   def test_creation

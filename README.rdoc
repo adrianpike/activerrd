@@ -13,7 +13,7 @@ ActiveRRD is a tool for having an AR-ish wrapper around Round Robin Databases. S
 
 == FEATURES/PROBLEMS:
 
-* Uh, it's incomplete.
+* Uh, it's incomplete. Make that *very* incomplete.
 
 == SYNOPSIS:
 

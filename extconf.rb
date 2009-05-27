@@ -29,5 +29,5 @@ EOF
     $CFLAGS += " -DHAVE_RRD_DUMP_R_2"
 end
 
-create_makefile("RRDtool")
+create_makefile("RRD")
 

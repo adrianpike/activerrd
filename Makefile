@@ -77,7 +77,7 @@ DISTCLEANFILES =
 
 extout = 
 extout_prefix = 
-target_prefix = 
+target_prefix = /lib
 LOCAL_LIBS = 
 LIBS = $(LIBRUBYARG_SHARED) -lfreetype -lpng -lrrd -lz  -lpthread -ldl -lm  
 SRCS = rrd_main.c

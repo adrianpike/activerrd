@@ -18,6 +18,8 @@ ActiveRRD is a tool for having an AR-ish wrapper around Round Robin Databases. S
 == SYNOPSIS:
 
 	class FooRrd < Activerrd::Base
+		rrd_key :user_id # :required => false
+	
 		rrd_step 30
 
 		rrd_data_source 'load', :gauge, :heartbeat=>60, :min=>0, :max=>255
@@ -31,6 +33,7 @@ ActiveRRD is a tool for having an AR-ish wrapper around Round Robin Databases. S
 	s = FooRrd.new
 	s.load = 300
 	s.hits = 20
+	s.user_id = 'john smith'
 	s.save
 
 	s = FooRrd.new

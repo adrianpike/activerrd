@@ -19,6 +19,16 @@ module Activerrd
     :steps=>2,
     :rows=>5
   }
+    
+     GRAPH_DEFAULTS = {
+       :title => '',
+       :start => Time.new-1.day,
+       :end => Time.new,
+       :interlace => true,
+       :format => 'PNG',
+       :width => 450
+     }
+
   
   def self.base_directory
     RRDS_LOCATION
@@ -108,25 +118,26 @@ module Activerrd
     end
  
    def self.graph(*args)
-     options = args.extract_options!
+     options = GRAPH_DEFAULTS.merge(args.extract_options!)
      
      connect!
      
-     RRD.graph(
-        'foobizzle.png',
+    graph_path = '/tmp/' + Time.new.to_i.to_s + '.png'
+   
+     RRD.graph(graph_path,
          "--title", " RubyRRD Demo", 
-         "--start", "#{(Time.now+3600).to_i}",
-         "--end", "start + 1000 min",
-         "--interlace", 
-         "--imgformat", "PNG",
-         "--width=450",
+         "--start", options[:start].to_i.to_s,
+         "--end", options[:end].to_i.to_s,
+         "--imgformat", options[:format],
+         "--width=#{options[:width]}",
          "DEF:foos=#{filename}:foos:AVERAGE",
          "DEF:bars=#{filename}:bars:AVERAGE",
          "CDEF:line=TIME,2400,%,300,LT,foos,UNKN,IF",
          "AREA:bars#00b6e4:beta",
          "AREA:line#0022e9:alpha",
          "LINE3:line#ff0000")
-         
+      
+      File.open(graph_path)
    end
 
    def self.rrd_step(size); @@step = size; end

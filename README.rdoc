@@ -13,7 +13,15 @@ ActiveRRD is a tool for having an AR-ish wrapper around Round Robin Databases. S
 
 == FEATURES/PROBLEMS:
 
-* Uh, it's incomplete. Make that *very* incomplete.
+* Automagically create RRDs based upon a model-y spec.
+* Update said RRDs
+* Query said RRDs
+* Generate shiny graphs from, once again, said RRDs using RRDtool
+
+== TODO:
+
+* Get good rdoc coverage across it.
+* test test test!
 
 == SYNOPSIS:
 
